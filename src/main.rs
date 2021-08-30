@@ -2,10 +2,10 @@ use std::env;
 
 use iced::
 {
-    // button, Align, Button, ProgressBar, Radio,
+    // button, Align, Button, ProgressBar, Radio, Row, Container, Space,
     scrollable, Column, Scrollable, Element,
-    Sandbox, Settings, Text, Container,  Length,
-    Row, Rule, Space,
+    Rule, Sandbox, Settings, Text, Length, HorizontalAlignment,
+     
 };
 
 use msg_parser::
@@ -33,46 +33,15 @@ impl Sandbox for Ausblick {
     type Message = Message;
 
     fn new() -> Self {
+
+        let args: Vec<String> = env::args().collect();
+        let path: String = args[1].to_string();
+        let outlook = Outlook::from_path(path).unwrap();
         Ausblick
         {
             scrollable_state: scrollable::State::new(),
-            subject: String::from("Subject"),
-            body: String::from("Body hello world lorem ipcontentsuasdasssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
-            ssssssssdalksjdölaskjdöalkjföalskdfj aslkdjfölas kddjfölaskdjföla jflöasjdflökajsd lföjasdlökfjlödskjföal sdjfölasd flaskdjflö asjdflkasjd f
-            asdlfkjasdölfjaölsdjf asldkfj a
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-           
-            
-
-
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            ölsdjföalskdjgöasfdjgölaskjdfglöasdjf lökasjdf  
-            asdlfkjasdölfj aölksdjf ölaksdjfölajsdöflkja öldjf ölaksdjjf m mother fuckor dolor
-            
-            -- FIN --"),
+            subject: outlook.subject,
+            body: outlook.body,
 
 
         }
@@ -94,9 +63,15 @@ impl Sandbox for Ausblick {
         Column::new()
             .push(
                 Scrollable::new(&mut self.scrollable_state)
-                .padding(10)
+                .padding(20)
+                .push(Text::new("Subject: ").size(30))
+                .push(Rule::horizontal(15))
                 .push(Text::new(self.subject.clone()))
+                .push(Rule::horizontal(15))
+                .push(Text::new("Message: ").size(30))
+                .push(Rule::horizontal(15))
                 .push(Text::new(self.body.clone()))
+                .push(Rule::horizontal(15))
                 .width(Length::Fill)
                 .height(Length::Fill))
             .into()
