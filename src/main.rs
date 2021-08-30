@@ -19,6 +19,7 @@ fn main() -> iced::Result {
 }
 
 struct Ausblick {
+    scrollable_state: scrollable::State,
     subject: String,
     body: String,
 }
@@ -34,8 +35,46 @@ impl Sandbox for Ausblick {
     fn new() -> Self {
         Ausblick
         {
+            scrollable_state: scrollable::State::new(),
             subject: String::from("Subject"),
-            body: String::from("Body"),
+            body: String::from("Body hello world lorem ipcontentsuasdasssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss
+            ssssssssdalksjdölaskjdöalkjföalskdfj aslkdjfölas kddjfölaskdjföla jflöasjdflökajsd lföjasdlökfjlödskjföal sdjfölasd flaskdjflö asjdflkasjd f
+            asdlfkjasdölfjaölsdjf asldkfj a
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+           
+            
+
+
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            ölsdjföalskdjgöasfdjgölaskjdfglöasdjf lökasjdf  
+            asdlfkjasdölfj aölksdjf ölaksdjfölajsdöflkja öldjf ölaksdjjf m mother fuckor dolor
+            
+            -- FIN --"),
+
+
         }
     }
 
@@ -50,11 +89,19 @@ impl Sandbox for Ausblick {
     }
 
     fn view (&mut self) -> Element<Message> {
-        Column::new().push(Text::new("Hello World!")).into()
+
+
+        Column::new()
+            .push(
+                Scrollable::new(&mut self.scrollable_state)
+                .padding(10)
+                .push(Text::new(self.subject.clone()))
+                .push(Text::new(self.body.clone()))
+                .width(Length::Fill)
+                .height(Length::Fill))
+            .into()
+
     }
-
-
-
 
 }
 
