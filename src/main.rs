@@ -4,8 +4,7 @@ use iced::
 {
     // button, Align, Button, ProgressBar, Radio, Row, Container, Space,
     scrollable, Column, Scrollable, Element,
-    Rule, Sandbox, Settings, Text, Length, HorizontalAlignment,
-     
+    Rule, Sandbox, Settings, Text, Length,
 };
 
 use msg_parser::
@@ -42,8 +41,6 @@ impl Sandbox for Ausblick {
             scrollable_state: scrollable::State::new(),
             subject: outlook.subject,
             body: outlook.body,
-
-
         }
     }
 
@@ -58,22 +55,20 @@ impl Sandbox for Ausblick {
     }
 
     fn view (&mut self) -> Element<Message> {
-
-
         Column::new()
             .push(
                 Scrollable::new(&mut self.scrollable_state)
-                .padding(20)
-                .push(Text::new("Subject: ").size(30))
-                .push(Rule::horizontal(15))
-                .push(Text::new(self.subject.clone()))
-                .push(Rule::horizontal(15))
-                .push(Text::new("Message: ").size(30))
-                .push(Rule::horizontal(15))
-                .push(Text::new(self.body.clone()))
-                .push(Rule::horizontal(15))
-                .width(Length::Fill)
-                .height(Length::Fill))
+                    .padding(20)
+                    .push(Text::new("Subject: ").size(30))
+                    .push(Rule::horizontal(15))
+                    .push(Text::new(self.subject.clone()))
+                    .push(Rule::horizontal(15))
+                    .push(Text::new("Message: ").size(30))
+                    .push(Rule::horizontal(15))
+                    .push(Text::new(self.body.clone()))
+                    .push(Rule::horizontal(15))
+                    .width(Length::Fill)
+                    .height(Length::Fill))
             .into()
 
     }
