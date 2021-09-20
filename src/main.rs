@@ -5,13 +5,13 @@ use iced::
     // button, Align, Button, ProgressBar, Radio, Row, Container, Space,
     scrollable, Column, Scrollable, Element,
     Rule, Sandbox, Settings, Text, Length, HorizontalAlignment,
-     
+
 };
 
 use msg_parser::
 {
     Outlook,
- // Person, Attachment, TransportHeaders
+    // Person, Attachment, TransportHeaders
 };
 
 fn main() -> iced::Result {
@@ -34,17 +34,30 @@ impl Sandbox for Ausblick {
 
     fn new() -> Self {
 
-        let args: Vec<String> = env::args().collect();
-        let path: String = args[1].to_string();
-        let outlook = Outlook::from_path(path).unwrap();
-        Ausblick
+
+        let argc = env::args().count();
+
+        if argc >= 2
         {
-            scrollable_state: scrollable::State::new(),
-            subject: outlook.subject,
-            body: outlook.body,
-
-
+            let args: Vec<String> = env::args().collect();
+            let path: String = args[1].to_string();
+            let outlook = Outlook::from_path(path).unwrap();
+            Ausblick
+            {
+                scrollable_state: scrollable::State::new(),
+                subject: outlook.subject,
+                body: outlook.body,
+            }
         }
+	else
+	{
+            Ausblick
+            {
+                scrollable_state: scrollable::State::new(),
+                subject: "".to_string(),
+                body: "".to_string(),
+            }
+	}
     }
 
     fn title (&self) -> String {
@@ -63,20 +76,19 @@ impl Sandbox for Ausblick {
         Column::new()
             .push(
                 Scrollable::new(&mut self.scrollable_state)
-                .padding(20)
-                .push(Text::new("Subject: ").size(30))
-                .push(Rule::horizontal(15))
-                .push(Text::new(self.subject.clone()))
-                .push(Rule::horizontal(15))
-                .push(Text::new("Message: ").size(30))
-                .push(Rule::horizontal(15))
-                .push(Text::new(self.body.clone()))
-                .push(Rule::horizontal(15))
-                .width(Length::Fill)
-                .height(Length::Fill))
+                    .padding(20)
+                    .push(Text::new("Subject: ").size(30))
+                    .push(Rule::horizontal(15))
+                    .push(Text::new(self.subject.clone()))
+                    .push(Rule::horizontal(15))
+                    .push(Text::new("Message: ").size(30))
+                    .push(Rule::horizontal(15))
+                    .push(Text::new(self.body.clone()))
+                    .push(Rule::horizontal(15))
+                    .width(Length::Fill)
+                    .height(Length::Fill))
             .into()
 
     }
 
 }
-
