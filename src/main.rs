@@ -2,9 +2,9 @@ use std::env;
 
 use iced::
 {
-    // button, Align, Button, ProgressBar, Radio, Row, Container, Space,
+    button, Button, //Align,  ProgressBar, Radio, Row, Container, Space, HorizontalAlignment,
     scrollable, Column, Scrollable, Element,
-    Rule, Sandbox, Settings, Text, Length, HorizontalAlignment,
+    Rule, Sandbox, Settings, Text, Length, 
 
 };
 
@@ -18,15 +18,17 @@ fn main() -> iced::Result {
     Ausblick::run(Settings::default())
 }
 
+
 struct Ausblick {
     scrollable_state: scrollable::State,
     subject: String,
     body: String,
+    open_button: button::State,
 }
 
 #[derive(Debug, Clone, Copy)]
 enum Message {
-
+    OpenFileDialog,
 }
 
 impl Sandbox for Ausblick {
@@ -47,6 +49,7 @@ impl Sandbox for Ausblick {
                 scrollable_state: scrollable::State::new(),
                 subject: outlook.subject,
                 body: outlook.body,
+		open_button: button::State::new(),
             }
         }
 	else
@@ -56,6 +59,7 @@ impl Sandbox for Ausblick {
                 scrollable_state: scrollable::State::new(),
                 subject: "".to_string(),
                 body: "".to_string(),
+		open_button: button::State::new(),
             }
 	}
     }
@@ -66,13 +70,12 @@ impl Sandbox for Ausblick {
 
     fn update (&mut self, message: Message) {
         match message {
+	    Message::OpenFileDialog => {}
 
         }
     }
 
     fn view (&mut self) -> Element<Message> {
-
-
         Column::new()
             .push(
                 Scrollable::new(&mut self.scrollable_state)
@@ -87,6 +90,10 @@ impl Sandbox for Ausblick {
                     .push(Rule::horizontal(15))
                     .width(Length::Fill)
                     .height(Length::Fill))
+	    .push(Button::new(&mut self.open_button, Text::new("Open"))
+		  .width(Length::Fill)
+		  .padding(20)
+		  .on_press(Message::OpenFileDialog))
             .into()
 
     }
