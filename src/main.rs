@@ -5,7 +5,6 @@ use iced::
     button, Button, //Align,  ProgressBar, Radio, Row, Container, Space, HorizontalAlignment,
     scrollable, Column, Scrollable, Element,
     Rule, Sandbox, Settings, Text, Length, 
-
 };
 
 use msg_parser::
@@ -17,7 +16,6 @@ use msg_parser::
 fn main() -> iced::Result {
     Ausblick::run(Settings::default())
 }
-
 
 struct Ausblick {
     scrollable_state: scrollable::State,
@@ -49,19 +47,19 @@ impl Sandbox for Ausblick {
                 scrollable_state: scrollable::State::new(),
                 subject: outlook.subject,
                 body: outlook.body,
-		open_button: button::State::new(),
+		        open_button: button::State::new(),
             }
         }
-	else
-	{
+	    else
+	    {
             Ausblick
             {
                 scrollable_state: scrollable::State::new(),
                 subject: "".to_string(),
                 body: "".to_string(),
-		open_button: button::State::new(),
+            	open_button: button::State::new(),
             }
-	}
+	    }
     }
 
     fn title (&self) -> String {
@@ -71,7 +69,6 @@ impl Sandbox for Ausblick {
     fn update (&mut self, message: Message) {
         match message {
 	    Message::OpenFileDialog => {}
-
         }
     }
 
@@ -81,13 +78,9 @@ impl Sandbox for Ausblick {
                 Scrollable::new(&mut self.scrollable_state)
                     .padding(20)
                     .push(Text::new("Subject: ").size(30))
-                    .push(Rule::horizontal(15))
                     .push(Text::new(self.subject.clone()))
-                    .push(Rule::horizontal(15))
                     .push(Text::new("Message: ").size(30))
-                    .push(Rule::horizontal(15))
                     .push(Text::new(self.body.clone()))
-                    .push(Rule::horizontal(15))
                     .width(Length::Fill)
                     .height(Length::Fill))
 	    .push(Button::new(&mut self.open_button, Text::new("Open"))
@@ -95,7 +88,5 @@ impl Sandbox for Ausblick {
 		  .padding(20)
 		  .on_press(Message::OpenFileDialog))
             .into()
-
     }
-
 }
