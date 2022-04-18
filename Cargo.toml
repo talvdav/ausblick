@@ -7,5 +7,4 @@ edition = "2018"
 
 [dependencies]
 gtk = { version = "0.4.7", package = "gtk4"}
-iced = "0.3"
 msg_parser = "0.1"
