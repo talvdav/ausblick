@@ -1,5 +1,11 @@
-use gtk::prelude::*;
-use gtk::{Application, ApplicationWindow, Button};
+use gtk::{prelude::*};
+use gtk::{Application
+          , ApplicationWindow
+          , Button
+          , TextView
+          , Box
+          , Orientation
+};
 
 pub fn main() {
     // Create a new application
@@ -30,11 +36,31 @@ fn build_ui(app: &Application) {
         button.set_label("Hello World!");
     });
 
+    let tv = TextView::builder()
+        .height_request(50)
+        .width_request(200)
+        .margin_top(12)
+        .margin_bottom(12)
+        .margin_start(12)
+        .margin_end(12)
+        .build();
+
+    let b = Box::builder()
+        .orientation(Orientation::Vertical)
+        .build();
+
+    b.append(&tv);
+    b.append(&button);
+
     // Create a window
     let window = ApplicationWindow::builder()
+        .title("Ausblick - Simple .msg Viewer")
         .application(app)
-        .title("My GTK App")
-        .child(&button)
+        .margin_bottom(10)
+        .margin_top(10)
+        .margin_start(10)
+        .margin_end(10)
+        .child(&b)
         .build();
 
     // Present window
