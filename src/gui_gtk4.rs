@@ -1,11 +1,5 @@
-use gtk::{prelude::*};
-use gtk::{Application
-          , ApplicationWindow
-          , Button
-          , TextView
-          , Box
-          , Orientation
-};
+use gtk::prelude::*;
+use gtk::{Application, ApplicationWindow, Box, Button, Orientation, TextView};
 
 pub fn main() {
     // Create a new application
@@ -45,12 +39,9 @@ fn build_ui(app: &Application) {
         .margin_end(12)
         .build();
 
-    let b = Box::builder()
-        .orientation(Orientation::Vertical)
-        .build();
+    let b = Box::builder().orientation(Orientation::Vertical).build();
 
     b.append(&tv);
-    b.append(&button);
 
     // Create a window
     let window = ApplicationWindow::builder()
