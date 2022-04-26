@@ -8,3 +8,4 @@ edition = "2018"
 [dependencies]
 iced = "0.3"
 msg_parser = "0.1"
+native-dialog = "0.6.3"

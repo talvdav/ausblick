@@ -76,6 +76,7 @@ version = "0.1.0"
 dependencies = [
  "iced",
  "msg_parser",
+ "native-dialog",
 ]
 
 [[package]]
@@ -410,6 +411,12 @@ dependencies = [
  "cfg-if 1.0.0",
  "lazy_static",
 ]
+
+[[package]]
+name = "cty"
+version = "0.2.2"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b365fabc795046672053e29c954733ec3b05e4be654ab130fe8f1f94d7051f35"
 
 [[package]]
 name = "d3d12"
@@ -837,7 +844,7 @@ dependencies = [
  "log",
  "parking_lot",
  "range-alloc",
- "raw-window-handle",
+ "raw-window-handle 0.3.3",
  "smallvec",
  "spirv_cross",
  "thunderdome",
@@ -860,7 +867,7 @@ dependencies = [
  "log",
  "parking_lot",
  "range-alloc",
- "raw-window-handle",
+ "raw-window-handle 0.3.3",
  "smallvec",
  "spirv_cross",
  "thunderdome",
@@ -875,7 +882,7 @@ checksum = "9f07ef26a65954cfdd7b4c587f485100d1bb3b0bd6a51b02d817d6c87cca7a91"
 dependencies = [
  "gfx-hal",
  "log",
- "raw-window-handle",
+ "raw-window-handle 0.3.3",
 ]
 
 [[package]]
@@ -895,7 +902,7 @@ dependencies = [
  "log",
  "naga",
  "parking_lot",
- "raw-window-handle",
+ "raw-window-handle 0.3.3",
  "spirv_cross",
  "wasm-bindgen",
  "web-sys",
@@ -921,7 +928,7 @@ dependencies = [
  "objc",
  "parking_lot",
  "range-alloc",
- "raw-window-handle",
+ "raw-window-handle 0.3.3",
  "spirv_cross",
  "storage-map",
 ]
@@ -942,7 +949,7 @@ dependencies = [
  "naga",
  "objc",
  "parking_lot",
- "raw-window-handle",
+ "raw-window-handle 0.3.3",
  "smallvec",
  "winapi 0.3.9",
 ]
@@ -955,7 +962,7 @@ checksum = "c1d9cc8d3b573dda62d0baca4f02e0209786e22c562caff001d77c389008781d"
 dependencies = [
  "bitflags",
  "naga",
- "raw-window-handle",
+ "raw-window-handle 0.3.3",
  "thiserror",
 ]
 
@@ -1145,7 +1152,7 @@ dependencies = [
  "glam",
  "iced_native",
  "iced_style",
- "raw-window-handle",
+ "raw-window-handle 0.3.3",
  "thiserror",
 ]
 
@@ -1201,7 +1208,7 @@ dependencies = [
  "iced_graphics",
  "iced_native",
  "log",
- "raw-window-handle",
+ "raw-window-handle 0.3.3",
  "wgpu",
  "wgpu_glyph",
 ]
@@ -1337,9 +1344,9 @@ checksum = "830d08ce1d1d941e6b30645f1a0eb5643013d835ce3779a5fc208261dbe10f55"
 
 [[package]]
 name = "libc"
-version = "0.2.101"
+version = "0.2.124"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "3cb00336871be5ed2c8ed44b60ae9959dc5b9f08539422ed43f09e34ecaeba21"
+checksum = "21a41fed9d98f27ab1c6d161da622a4fa35e8a54a8adc24bbf3ddd0ef70b0e50"
 
 [[package]]
 name = "libloading"
@@ -1535,6 +1542,26 @@ dependencies = [
  "petgraph",
  "spirv_headers",
  "thiserror",
+]
+
+[[package]]
+name = "native-dialog"
+version = "0.6.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "0ab637f328b31bd0855c43bd38a4a4455e74324d9e74e0aac6a803422f43abc6"
+dependencies = [
+ "block",
+ "cocoa",
+ "dirs-next",
+ "objc",
+ "objc-foundation",
+ "objc_id",
+ "once_cell",
+ "raw-window-handle 0.4.3",
+ "thiserror",
+ "wfd",
+ "which",
+ "winapi 0.3.9",
 ]
 
 [[package]]
@@ -1927,6 +1954,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0a441a7a6c80ad6473bd4b74ec1c9a4c951794285bf941c2126f607c72e48211"
 dependencies = [
  "libc",
+]
+
+[[package]]
+name = "raw-window-handle"
+version = "0.4.3"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "b800beb9b6e7d2df1fe337c9e3d04e3af22a124460fb4c30fcc22c9117cefb41"
+dependencies = [
+ "cty",
 ]
 
 [[package]]
@@ -2564,6 +2600,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "wfd"
+version = "0.1.7"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "e713040b67aae5bf1a0ae3e1ebba8cc29ab2b90da9aa1bff6e09031a8a41d7a8"
+dependencies = [
+ "libc",
+ "winapi 0.3.9",
+]
+
+[[package]]
 name = "wgpu"
 version = "0.7.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -2573,7 +2619,7 @@ dependencies = [
  "js-sys",
  "naga",
  "parking_lot",
- "raw-window-handle",
+ "raw-window-handle 0.3.3",
  "smallvec",
  "syn",
  "tracing",
@@ -2606,7 +2652,7 @@ dependencies = [
  "gpu-descriptor",
  "naga",
  "parking_lot",
- "raw-window-handle",
+ "raw-window-handle 0.3.3",
  "smallvec",
  "thiserror",
  "tracing",
@@ -2632,6 +2678,17 @@ dependencies = [
  "glyph_brush",
  "log",
  "wgpu",
+]
+
+[[package]]
+name = "which"
+version = "4.2.5"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "5c4fb54e6113b6a8772ee41c3404fb0301ac79604489467e0a9ce1f3e97c24ae"
+dependencies = [
+ "either",
+ "lazy_static",
+ "libc",
 ]
 
 [[package]]
@@ -2696,7 +2753,7 @@ dependencies = [
  "clipboard_macos",
  "clipboard_wayland",
  "clipboard_x11",
- "raw-window-handle",
+ "raw-window-handle 0.3.3",
 ]
 
 [[package]]
@@ -2723,7 +2780,7 @@ dependencies = [
  "objc",
  "parking_lot",
  "percent-encoding",
- "raw-window-handle",
+ "raw-window-handle 0.3.3",
  "smithay-client-toolkit 0.12.3",
  "wayland-client",
  "winapi 0.3.9",
