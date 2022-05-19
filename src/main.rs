@@ -66,6 +66,7 @@ impl Sandbox for Ausblick {
         match message {
             Message::OpenFileDialog => {
                 let path = FileDialog::new()
+                    .add_filter("Outlook", &["msg"])
                     .set_location("~")
                     .show_open_single_file()
                     .unwrap();
