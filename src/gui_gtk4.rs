@@ -1,5 +1,5 @@
 use gtk::prelude::*;
-use gtk::{Application, ApplicationWindow, Box, Button, Orientation, TextView};
+use gtk::{Application, ApplicationWindow, Box, Button, Orientation, TextView, TextBuffer};
 
 pub fn main() {
     // Create a new application
@@ -30,14 +30,23 @@ fn build_ui(app: &Application) {
         button.set_label("Hello World!");
     });
 
+
+    let text = TextBuffer::builder()
+        .text("Hello World")
+        .build();
+	
     let tv = TextView::builder()
+        .buffer(&text)
         .height_request(50)
         .width_request(200)
         .margin_top(12)
         .margin_bottom(12)
         .margin_start(12)
         .margin_end(12)
+        .editable(false)
+        .cursor_visible(false)
         .build();
+    
 
     let b = Box::builder().orientation(Orientation::Vertical).build();
 
