@@ -2,16 +2,7 @@ use native_dialog::FileDialog;
 use std::env;
 
 use iced::{
-    button,
-    scrollable,
-    Button, //Align,  ProgressBar, Radio, Row, Container, Space, HorizontalAlignment,
-    Column,
-    Element,
-    Length,
-    Sandbox,
-    Scrollable,
-    Settings,
-    Text,
+    button, scrollable, Button, Column, Element, Length, Sandbox, Scrollable, Settings, Text,
 };
 
 use msg_parser::Outlook;
