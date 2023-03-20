@@ -6,7 +6,7 @@ use iced::{
 };
 
 use iced::widget::{
-    button, Column, text, scrollable
+    button, Column, text, scrollable, 
 };
 
 use msg_parser::Outlook;
@@ -48,7 +48,7 @@ impl Sandbox for Ausblick {
     }
 
     fn title(&self) -> String {
-        String::from("Ausblick - Simple .msg Viewer")
+        String::from("Ausblick")
     }
 
     fn update(&mut self, message: Message) {
@@ -56,6 +56,7 @@ impl Sandbox for Ausblick {
             Message::OpenFileDialog => {
                 let path = FileDialog::new()
                     .add_filter("Outlook", &["msg"])
+                    .add_filter("Mailbox", &["eml"])
                     .set_location("~")
                     .show_open_single_file()
                     .unwrap();
@@ -80,12 +81,10 @@ impl Sandbox for Ausblick {
                         .push(button(
                             text("open").horizontal_alignment(alignment::Horizontal::Center))
                               .on_press(Message::OpenFileDialog))
-                        .push(text("Subject:"))
+                        .push(text("Subject:").size(28))
                         .push(text(&self.subject))
-                        .push(text("Messge:"))
-                        .push(text(&self.body))
-                ));
+                        .push(text("Messge:").size(28))
+                        .push(text(&self.body))));
         scrollable_content
     }
-
 }
