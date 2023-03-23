@@ -1,12 +1,16 @@
 use native_dialog::FileDialog;
+
 use std::env;
+use std::path::Path;
+use std::path::PathBuf;
+use std::ffi::OsStr;
 
 use iced::{
     Element, Sandbox,  Settings, alignment,
 };
 
 use iced::widget::{
-    button, Column, text, scrollable, 
+    button, Column, text, scrollable,
 };
 
 use msg_parser::Outlook;
@@ -18,6 +22,18 @@ fn main() -> iced::Result {
 struct Ausblick {
     subject: String,
     body: String,
+}
+
+fn parse_mailformats(path: &str) -> Ausblick {
+
+    let file = Path::new(path);
+    let ext = file.extension().unwrap();
+
+    Ausblick {
+        subject: "Foo".to_string(),
+        body: "Bar".to_string(),
+    }
+
 }
 
 #[derive(Debug, Clone, Copy)]
@@ -33,11 +49,11 @@ impl Sandbox for Ausblick {
 
         if argc >= 2 {
             let args: Vec<String> = env::args().collect();
-            let path: String = args[1].to_string();
-            let outlook = Outlook::from_path(path).unwrap();
+            let file_path: String = args[1].to_string();
+            let f = parse_mailformats(&file_path);
             Ausblick {
-                subject: outlook.subject,
-                body: outlook.body,
+                subject: f.subject,
+                body: f.body,
             }
         } else {
             Ausblick {
@@ -63,9 +79,11 @@ impl Sandbox for Ausblick {
 
                 match path {
                     Some(path) => {
-                        let outlook = Outlook::from_path(path).unwrap();
-                        self.subject = outlook.subject;
-                        self.body = outlook.body;
+                        let p = &path.into_os_string().into_string().unwrap(); 
+                        println!("P {}",&p);
+                        let f = parse_mailformats(&p);
+                        self.subject = f.subject;
+                        self.body = f.body;
                     }
                     None => return,
                 };
