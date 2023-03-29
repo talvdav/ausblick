@@ -1,7 +1,6 @@
 use native_dialog::FileDialog;
 
 use std::env;
-use std::ffi::OsStr;
 use std::path::Path;
 use std::path::PathBuf;
 
@@ -10,6 +9,7 @@ use iced::{alignment, Element, Sandbox, Settings};
 use iced::widget::{button, scrollable, text, Column};
 
 use msg_parser::Outlook;
+use eml_parser::{eml::Eml, EmlParser};
 
 fn main() -> iced::Result {
     Ausblick::run(Settings::default())
@@ -25,15 +25,19 @@ fn parse_mailformats(path: &str) -> Ausblick {
     let ext = file.extension().unwrap();
 
     if ext == PathBuf::from("msg") {
+        let msg = Outlook::from_path(file).unwrap();
         return Ausblick {
-            subject: "MSG".to_string(),
-            body: "MSG".to_string(),
+            subject: msg.subject,
+            body: msg.body,
         };
     }
-    if ext == PathBuf::from("EML") {
+    if ext == PathBuf::from("eml") {
+        let eml: Eml = EmlParser::from_file(file).unwrap()
+            .with_body()
+            .parse().unwrap();
         return Ausblick {
-            subject: "EML".to_string(),
-            body: "EML".to_string(),
+            subject: eml.subject.to_owned().unwrap(),
+            body: eml.body.to_owned().unwrap(),
         };
     } else {
         Ausblick {
