@@ -1,15 +1,14 @@
-use native_dialog::FileDialog;
-
 use std::env;
 use std::path::Path;
 use std::path::PathBuf;
 
 use iced::{alignment, Element, Sandbox, Settings};
-
 use iced::widget::{button, scrollable, text, Column};
+use native_dialog::FileDialog;
 
 use msg_parser::Outlook;
 use eml_parser::{eml::Eml, EmlParser};
+
 
 fn main() -> iced::Result {
     Ausblick::run(Settings::default())
