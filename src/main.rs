@@ -82,8 +82,8 @@ impl Sandbox for Ausblick {
         match message {
             Message::OpenFileDialog => {
                 let path = FileDialog::new()
-                    .add_filter("Outlook", &["msg"])
-                    .add_filter("Mailbox", &["eml"])
+                    .add_filter("", &["msg", "eml"])
+                    .add_filter("All", &["*"])
                     .set_location("~")
                     .show_open_single_file()
                     .unwrap();
@@ -105,15 +105,18 @@ impl Sandbox for Ausblick {
     fn view(&self) -> Element<Message> {
         let scrollable_content: Element<Message> = Element::from(scrollable(
             Column::new()
-                .push(
-                    button(text("open").horizontal_alignment(alignment::Horizontal::Center))
-                        .on_press(Message::OpenFileDialog),
-                )
                 .push(text("Subject:").size(28))
                 .push(text(&self.subject))
                 .push(text("Messge:").size(28))
                 .push(text(&self.body)),
         ));
-        scrollable_content
+
+        Column::new()
+                .push(
+                    button(text("open").horizontal_alignment(alignment::Horizontal::Center))
+                        .on_press(Message::OpenFileDialog),
+                )
+        .push(scrollable_content).into()
+        
     }
 }
