@@ -1,7 +1,6 @@
-mod app;
 mod gui;
+mod app;
 
 fn main()  {
-    _ = gui::icedui::run_iced();
+    gui::run();
 }
-
