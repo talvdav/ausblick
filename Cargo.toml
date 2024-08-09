@@ -7,6 +7,6 @@ edition = "2021"
 
 [dependencies]
 eml-parser = "0.1.4"
-iced = "0.10.0"
+iced = "0.12.1"
 msg_parser = "0.1.1"
 native-dialog = "0.7.0"
